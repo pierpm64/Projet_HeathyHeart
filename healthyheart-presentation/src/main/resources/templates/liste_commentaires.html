@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+<th:block th:replace="../static/layout :: headerfiles"></th:block>
+<title>Liste des commentaires</title>
+</head>
+<body>
+	<div th:replace="../static/layout :: header"></div>
+	<hr />
+	<br><br><br><br><br>
+	
+	<div class="container">
+		<div th:if="${commentaireForm.allowedToComment}" class="col-md-8 post-comments">
+			<form action="#" th:action="@{/ajouterCommentaire}"
+				th:object="${commentaireForm}" method="POST">
+				<input type="hidden" th:field="*{idProjet}" />
+				<input type="hidden" th:field="*{role}" />
+				<input type="hidden" th:field="*{libelle}" />
+				<div class="form-group">
+					<label for="comment">Votre commentaire</label>
+					<textarea th:field="*{message}"
+						placeholder="Votre message ici" class="form-control" rows="3">
+					 </textarea>
+					 <br/>
+					<input type="submit" value="Envoyer" class="btn btn-primary" />
+				</div>
+			</form>
+		</div>
+		<div th:unless="${commentaireForm.allowedToComment}"></div>
+		<div class="row">
+			<div class="col-md-8">
+				<div class="page-header">
+					<h4 th:text="${listeComm.size} + ' commentaires'"></h4>
+				</div>
+				<div class="comments-list" th:each="comm:${listeComm}">
+					<div class="media">
+						<p class="pull-right">
+							<small
+								th:text="${#calendars.format(comm.date,'dd MMM yyyy HH:mm')}"></small>
+						</p>
+						<a class="media-left" href="#"> </a>
+						<div class="media-body">
+							<h4 class="media-heading user_name"
+								th:text="${comm.role.utilisateur.prenom} + ' ' + ${comm.role.utilisateur.nom}"></h4>
+							<p th:text="${comm.message}">
+								<small><a href="">Like</a> - <a href="">Share</a></small>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+	<div th:replace="../static/layout :: footer"></div>
+</body>
+</html>

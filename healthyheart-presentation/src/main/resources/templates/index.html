@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+<meta charset="UTF-8">
+<th:block th:replace="../static/layout :: headerfiles"></th:block>
+<title>Index</title>
+<style>
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+.bg {
+  /* The image used */
+  background-image: url("/img/bg/image_fond.jpg");
+
+  /* Full height */
+  height: 100%; 
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+</style>
+</head>
+<body id="page-top" class="index">
+	<div th:replace="../static/layout :: header"></div>
+	<div  class="bg">
+		<div class="container vertical-center">
+
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<div class="container">
+				<h3 th:text="'Bonjour ' + ${Utilisateur.prenom} + ' ' +  ${Utilisateur.nom}" />
+
+				<div th:if="${isConnected}">
+					<a th:href="@{/deconnexion}" 
+						th:text="'Deconnexion (' +  ${Utilisateur.email} + ')'" class="btn btn-primary"/>
+
+						<div th:if="${nbMsg != -1}">
+							<a class="btn btn-primary" href="/afficherListeUserMessages/"
+								th:text="'Messagerie (' + ${nbMsg} + ' message(s) non lu(s) )'"></a>
+						</div>
+
+
+						<div th:if="${isAdmin}">
+							<a class="btn btn-primary" href="/ShowAllProjetList/">Liste Projets</a>
+						</div>
+				</div>
+
+	
+			</div>
+		</div>
+	</div>
+	<div th:replace="../static/layout :: footer"></div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+<meta charset="UTF-8">
+<th:block th:replace="../static/layout_light :: headerfiles"></th:block>
+<title>Liste des messages</title>
+<style>
+.row-dateheure {
+  width: 10%;
+}
+.row-titre {
+  width: 30%;
+}
+.row-lu {
+  width: 4%;
+}
+.row-email {
+  width: 15%;
+}
+.row-link {
+  width: 10%;
+}
+</style>
+</head>
+<body id="page-top" class="index">
+	<div th:replace="../static/layout_light :: header"></div>
+	
+<br/><br/><br/><br/><br/>
+	<hr />
+	<h1  th:text="'Boite Reception ( ' + ${messagesform.etatMsg} + ' )'"  class="text-center"></h1>
+	<hr />
+	
+	<div class="container">
+		<div class="row">
+	
+			<div class="col-lg-1">
+				<form action="#" th:action="@{/selectionStatMsg}" method="POST">
+					<div class="dropdown">
+						<select class="btn btn-primary" th:id="ComboBoxSelectStat"
+							th:field="*{messagesform.critere}">
+							<option value="0">Tout</option>
+							<option value="1">Non Lus</option>
+							<option value="2">Lus</option>
+						</select>
+					</div>
+				</form>
+			</div>
+			<div class="col-lg-2">
+				<a class="btn btn-primary" data-toggle="collapse" th:href="@{/ajouterUserMessage}"
+					role="button">Nouveau Message</a>
+			</div>
+
+		</div>
+	<br>
+		<table class="table">
+		<thead class="thead-light">
+			<tr>
+				<th class="row-titre">Titre</th>
+				<th class="row-dateheure">Date/heure</th>
+				<th class="row-email">Emetteur</th>
+				<th class="row-lu">Lu</th>
+				<th class="row-link">Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="msg:${messagesform.lstMsgRecu}">
+				<td th:text="${msg.messageInterne.titre}"></td>
+				<td th:text="${#calendars.format(msg.messageInterne.date,'dd/MM/yyyy à HH:mm::ss')}"></td>
+				<td th:text="${msg.messageInterne.emetteur.email}"></td>
+				<td th:text="${msg.isRead}? 'Oui' : 'Non'"></td>
+				<td>
+					<a class="btn btn-info" data-toggle="collapse" th:href="@{/VisualierUserMessage/{id}(id=${msg.idMessageRecu})}">visualiser</a>
+				</td>
+			</tr>
+		</tbody>
+		
+		</table>
+	<br/><br/>
+	</div></div></div>
+	<div th:replace="../static/layout_light :: footer"></div>
+<script>
+      $("#ComboBoxSelectStat").change(function () {
+        $("form").submit()
+   })
+</script>
+</body>
+</html>

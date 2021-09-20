@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+<th:block th:replace="../static/layout :: headerfiles"></th:block>
+<meta charset="UTF-8">
+<title>don valide</title>
+</head>
+<body>
+<div th:replace="../static/layout :: header"></div>
+
+<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<hr />
+	
+	<div class=container>
+		<div class="row">
+			<h3 class="text-center">Votre don a été validé. </h3>
+		</div>
+		<div class="row">
+			<h4 class="text-center">L'équipe de Healthy Heart vous remercie </h4>
+			<h4 class="text-center">de votre participation</h4>
+		</div>
+		<hr>
+		<a th:href="@{/}">Revenir à la page d'accueil</a>		
+	</div>	
+	<hr>
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	
+<div th:replace="../static/layout :: footer"></div>
+</body>

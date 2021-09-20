@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+<meta charset="UTF-8">
+<th:block th:replace="../static/layout :: headerfiles"></th:block>
+<title>Liste Projet By User</title>
+</head>
+<body id="page-top" class="index">
+	<div th:replace="../static/layout :: header"></div>
+	<div id="headerwrap" class="fullheight no-overlay default-bg">
+		<div class="container vertical-center">
+
+<br/><br/><br/><br/><br/>
+
+			<hr />
+			<h1 class="text-center">Liste de vos Projets</h1>
+			<hr />
+
+			<div class="container">
+				<fieldset>
+
+					<!-- 			<span th:text="${message}"></span> <label
+				th:text="${prenomUtilisateur}"></label>  -->
+
+					<br />
+					<table class="table">
+						<thead class="thead-light">
+							<tr>
+								<th>Photo Principale</th>
+								<th>Titre</th>
+								<th>Montant Collecté</th>
+								<th>Montant Attendu</th>
+								<th>StatutProjet</th>
+								<th>Don matériel</th>
+								<th>Don temps</th>
+								<th>Portefeuille</th>
+								<th>Date maj</th>
+								<th>Date fin</th>
+								<!-- <th>Action</th> -->
+								<th>Action</th>
+							</tr>
+
+						</thead>
+						<tbody>
+							<tr th:each="pdf : ${listProjetForUser}">
+
+								<td th:if="${pdf.idImage != -1}"><img
+									th:src="@{/viewImage/{id}(id=${pdf.idImage})}"
+									style="max-width: 100px; height: auto;"></td>
+								<td th:if="${pdf.idImage == -1}"></td>
+								<td th:text="${pdf.projet.titre}"></td>
+								<td th:text="${pdf.projet.montantCollecte}"></td>
+								<td th:text="${pdf.projet.montantAttendu}"></td>
+								<td th:text="${pdf.projet.statutDuProjet}"></td>
+								<td th:text="${pdf.projet.donMateriel}?'Oui':'Non'"></td>
+								<td th:text="${pdf.projet.donTemps}?'Oui':'Non'"></td>
+								<td th:text="${pdf.projet.portefeuilleprojet.libelle}"></td>
+								<td
+									th:text="${#calendars.format(pdf.projet.dateMaj,'dd MM yyyy HH:mm')}"></td>
+								<td th:text="${pdf.projet.dateFin}"></td>
+								<!-- <td><a
+							th:href="@{/NewUploadPicture/{id}(id=${projet.idProjet})}">Add
+								Image</a></td> -->
+								<td><a class="btn btn-info"
+									th:href="@{/showProjet/{id}/ADMU(id=${pdf.projet.idProjet})}">Detail</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</fieldset>
+			</div>
+			
+			
+
+		</div>
+	</div>
+	<div th:replace="../static/layout :: footer"></div>
+</body>
+</html>

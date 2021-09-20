@@ -1,0 +1,20 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>fr.isika.cdi07.group1</groupId>
+    <artifactId>projet3demo</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>healthyheart-presentation</artifactId>
+  
+  <!-- ajout -->
+  <dependencies>
+  	<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>healthyheart-services</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+	</dependency>
+  </dependencies>
+  <!-- fin ajout -->
+  
+</project>

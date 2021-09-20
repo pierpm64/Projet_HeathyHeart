@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Liste utilisateurs</title>
+</head>
+<body>
+	<fieldset>
+		<legend>Page liste utilisateurs </legend>
+		<table>
+			<tr>
+				<th>Nom</th>
+				<th>Prénom</th>
+				<th>Email</th>
+				<th>Mot de passe</th>
+				<th>Actions</th>
+			</tr>
+			<tr th:each="utilisateur:${listeUtilisateurs}">
+				<td><p th:text="${utilisateur.nom}"></p></td>
+				<td><p th:text="${utilisateur.prenom}"></p></td>
+				<td><p th:text="${utilisateur.email}"></p></td>
+				<td><p th:text="${utilisateur.mdp}"></p></td>
+				<td><a th:href="@{/showUsersForUpdate/{email}(email=${utilisateur.email})}">Modifier</a></td>
+			</tr>
+		</table>
+	</fieldset>
+</body>
+</html>

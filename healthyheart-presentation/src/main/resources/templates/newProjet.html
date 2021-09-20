@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+<meta charset="UTF-8">
+<th:block th:replace="../static/layout_light :: headerfiles"></th:block>
+<title>Créer un projet</title>
+</head>
+<body>
+	<div th:replace="../static/layout_light :: header"></div>
+
+
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<hr />
+	<h1 class="text-center">Création de votre projet</h1>
+	<hr />
+
+	<br />
+	<form action="#" th:action="@{/saveProjet}" method="POST">
+
+		<!-- hidden  -->
+		<input type="hidden" th:field="*{monForm.porteurProjet.typePorteur}">
+		<input type="hidden" th:field="*{monForm.role}">
+		<input type="hidden" th:field="*{monForm.porteurProjet}">
+		<input type="hidden" th:field="*{monForm.utilisateur}">
+		<input type="hidden" th:field="*{monForm}">
+
+		<div class="container">
+			<div class="row text-center">
+				<h4>Structure</h4>
+			</div>
+			<br />
+			<div class="form-group">
+				<div class="row">
+					<div class="col-lg-2"></div>
+
+					<div class="col-lg-3">
+						<label>Nom de la Structure</label> <input id="libellePP"
+							class="form-control" type="text"
+							th:field="*{monForm.porteurProjet.libelle}"
+							placeholder="tapez le nom de votre structure">
+					</div>
+					<div class="col-lg-2"></div>
+					<div class="col-lg-3">
+						<label>IBAN</label> <input id="IbanPP" class="form-control"
+							type="text" th:field="*{monForm.porteurProjet.iban}"
+							placeholder="FRxx xxxx xxxx xxxx xxx">
+					</div>
+					<div class="col-lg-2"></div>
+
+				</div>
+				<div class="row">
+					<div class="col-lg-4"></div>
+					<div class="col-lg-4 text-center">
+						<div class="dropdown">
+							<select class="btn btn-primary"
+								th:id="typePorteurProjetIdComboBox"
+								th:field=*{monForm.typePorteur}>
+								<option value="0">Selection Type</option>
+								<option value="1">PRIVE</option>
+								<option value="2">HOPITAL</option>
+								<option value="3">ASSOCIATION</option>
+								<option value="4">ENTREPRISE</option>
+							</select>
+						</div>
+						<div class="col-lg-4"></div>
+
+					</div>
+				</div>
+
+				<br />
+				<hr />
+				<br />
+
+				<div class="row text-center">
+					<h4>Votre projet</h4>
+				</div>
+				<br />
+				<div class="form-group">
+					<div class="row">
+						<div class="col-lg-2"></div>
+						<div class="col-lg-4">
+							<label>Titre</label> <input id="titreP" class="form-control"
+								type="text" th:field="*{monForm.projet.titre}"
+								placeholder="Titre du Projet">
+						</div>
+						<div class="col-lg-6"></div>
+					</div>
+				</div>
+				<br /> <br />
+				<div class="form-group">
+					<div class="row">
+						<div class="col-lg-2"></div>
+						<div class="col-lg-3">
+							<label>Montant Attendu</label> <input id="montantP"
+								class="form-control" type="number"
+								th:field="*{monForm.projet.montantAttendu}"
+								placeholder="Montant attendu">
+						</div>
+						<div class="col-lg-2"></div>
+						<div class="col-lg-3">
+							<label>Date de fin</label> <input id="datefinP"
+								class="form-control" type="date"
+								th:field="*{monForm.projet.dateFin}">
+						</div>
+						<div class="col-lg-2"></div>
+					</div>
+				</div>
+				<br /> <br />
+				<div class="form-group">
+					<div class="row">
+						<div class="col-lg-2"></div>
+						<div class="col-lg-3">
+							<div>
+								<br /> <input type="checkbox"
+									th:field="*{monForm.projet.donMateriel}"> <label>
+									Don de matériel</label> <br /> <input type="checkbox"
+									th:field="*{monForm.projet.donTemps}"> <label>
+									Don de temps</label>
+							</div>
+						</div>
+						<div class="col-lg-2"></div>
+						<div class="col-lg-3">
+							<div class="dropdown">
+								<select class="btn btn-primary" th:id="typeProjetIdComboBox"
+									th:field=*{typeProjet.idTypeProjet}>
+									<option value="0">Selection Type du projet</option>
+									<option th:each="tp : ${listTypeProjet}"
+										th:value="${tp.idTypeProjet}" th:text="${tp.libelle}"></option>
+								</select> <br /> <select class="btn btn-primary"
+									th:id="territoireIdComboBox"
+									th:field=*{territoire.idTerritoire}>
+									<option value="0">Selection du territoire</option>
+									<option th:each="t : ${listTerritoire}"
+										th:value="${t.idTerritoire}" th:text="${t.libelle}"></option>
+								</select>
+							</div>
+						</div>
+						<div class="col-lg-2"></div>
+					</div>
+				</div>
+				<br /> <br />
+				<div class="form-group">
+					<div class="row">
+						<div class="col-lg-2"></div>
+
+						<div class="col-lg-2"></div>
+						<div class="col-lg-3">
+							<div class="dropdown"></div>
+						</div>
+						<div class="col-lg-2"></div>
+					</div>
+				</div>
+				<br /> <br />
+				<div class="form-group">
+					<div class="row">
+						<div class="col-lg-2"></div>
+						<div class="col-lg-8">
+							<label>Description succincte</label>
+							<textarea rows="5" id="DSuccinctP" class="form-control"
+								type="text" th:field="*{monForm.projet.descriptionCourte}"
+								placeholder="Description succinct"></textarea>
+						</div>
+						<div class="col-lg-2"></div>
+					</div>
+				</div>
+				<br /> <br />
+				<div class="form-group">
+					<div class="row">
+						<div class="col-lg-2"></div>
+						<div class="col-lg-8">
+							<label>Description détaillée</label>
+							<textarea rows="15" id="DdetailP" class="form-control"
+								type="text" th:field="*{monForm.projet.descriptionLongue}"
+								placeholder="Description détaillée"></textarea>
+						</div>
+						<div class="col-lg-2"></div>
+					</div>
+				</div>
+				<br /> <br />
+				<div class="row">
+					<div class="col-lg-5"></div>
+					<div class="col-lg-2 text-center">
+						<button class="btn btn-primary" type="submit">Suivant</button>
+					</div>
+					<div class="col-lg-5"></div>
+				</div>
+
+				<!-- ATTENTION VOIR LIEN VERS AJOUT IMAGE   -->
+			</div>
+	</form>
+	<br />
+
+
+
+	<div th:replace="../static/layout_light :: footer"></div>
+</body>
+</html>

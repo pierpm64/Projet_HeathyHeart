@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+<th:block th:replace="../static/layout :: headerfiles"></th:block>
+<meta charset="UTF-8">
+<title>Liste contributeurs</title>
+</head>
+<body>
+	<div th:replace="../static/layout :: header"></div>
+
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<hr />
+	<h1 class="text-center">List Contributeurs d'un projet</h1>
+	<hr />
+
+	<div class="container">
+
+		<div>
+			<label>Total :</label> <label th:text="${count} +' contributions'"></label>
+		</div>
+		<br>
+		<table class="table">
+			<thead class="thead-light">
+				<tr>
+					<th>id_participation</th>
+					<th>nom prenom</th>
+					<th>type de participation</th>
+					<th>date participation</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="contrib:${contributeursList}">
+					<td><p th:text="${contrib.idParticipation}"></p></td>
+					<td th:if="${!contrib.anonyme}">
+						<p
+							th:text="${contrib.role.utilisateur.nom} + ' ' + ${contrib.role.utilisateur.prenom}"></p>
+					</td>
+					<td th:unless="${!contrib.anonyme}">
+						<p>Anonyme</p>
+					</td>
+					<td><p th:text="${contrib.typeParticipation}"></p></td>
+					<td><p
+							th:text="${#calendars.format(contrib.date,'dd MMM yyyy')}"></p></td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+	<br/>
+	<br/>
+	<br/>
+	<div th:replace="../static/layout :: footer"></div>
+</body>
+</html>

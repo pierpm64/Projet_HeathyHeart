@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+<meta charset="UTF-8">
+<th:block th:replace="../static/layout_light :: headerfiles"></th:block>
+<title>Liste des messages</title>
+<style>
+.row-dateheure {
+  width: 10%;
+}
+.row-titre {
+  width: 30%;
+}
+.row-lu {
+  width: 4%;
+}
+.row-email {
+  width: 15%;
+}
+.row-link {
+  width: 10%;
+}
+</style>
+</head>
+<body id="page-top" class="index">
+	<div th:replace="../static/layout_light :: header"></div>
+	
+<br/><br/><br/><br/><br/>
+	<hr />
+	<h1  class="text-center">Liste Messages</h1>
+	<hr />
+	
+	<div class="container">
+		<div class="row">
+	
+			<div class="col-lg-2">
+				<a class="btn btn-primary" data-toggle="collapse" th:href="@{/ajouterMessage}"
+					role="button">Nouveau Message</a>
+			</div>
+
+		</div>
+	<br>
+		<table>
+		<thead class="thead-light">
+			<tr>
+				<th class="row-titre">Titre</th>
+				<th class="row-dateheure">Date/heure</th>
+				<th class="row-email">Emetteur</th>
+				<th class="row-link">Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="msg:${messagesList}">
+				<td><p th:text="${msg.titre}"></p></td>
+				<td th:text="${#calendars.format(msg.date,'dd/MM/yyyy à HH:mm::ss')}"></td>
+				<td><p th:text="${msg.emetteur.email}"></p></td>
+				<td>
+					<a class="btn btn-primary" data-toggle="collapse" th:href="@{/VisualierMessage/{id}(id=${msg.idMessage})}">visualiser</a>
+				</td>
+			</tr>
+		</tbody>
+		
+		</table>
+
+	</div></div></div>
+	<div th:replace="../static/layout_light :: footer"></div>
+</body>
+</html>

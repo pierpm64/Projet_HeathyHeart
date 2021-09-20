@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+<meta charset="UTF-8">
+<th:block th:replace="../static/layout_light:: headerfiles"></th:block>
+<title>Gestion des images pour votre projet</title>
+</head>
+<body>
+
+	<div th:replace="../static/layout_light:: header"></div>
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<hr />
+	<h1 class="text-center">Gestion des images pour votre projet</h1>
+	<hr />
+
+	<br />
+
+	<div class="container">
+		<form action="#" th:action="@{/NewUploadPicture}" method="POST"
+			enctype="multipart/form-data">
+			<!-- Add hidden form field to handle update -->
+			<input type="hidden" th:field="*{docform.projet}" /> <input
+				type="hidden" th:field="*{docform.document.projet}" />
+
+			<div class="row">
+				<h4 class="text-center">Sélectionnez vos images</h4>
+			</div>
+			<br />
+			<div class="form-group">
+				<div class="row">
+					<div class="col-lg-2"></div>
+					<div class="col-lg-3">
+						<select class="btn btn-primary" th:id="ImageComboBox"
+							th:field=*{docform.libelImage}>
+							<option value="0">Selection image Projet</option>
+							<option value="1">Image Principale</option>
+							<option value="2">Seconde Image</option>
+							<option value="3">Troisieme Image</option>
+						</select>
+					</div>
+					<div class="col-lg-2"></div>
+					<div class="col-lg-3">
+						<input class="btn btn-primary" th:type="file"
+							accept="image/jpg, image/jpeg" th:field="*{docform.image}"
+							placeholder="Selection de l'image">
+					</div>
+					<div class="col-lg-2"></div>
+
+				</div>
+				<br />
+				<div class="row">
+					<div class="col-lg-5"></div>
+					<div class="col-lg-2">
+						<button class="btn btn-primary" type="submit">Enregister
+							l'image</button>
+					</div>
+					<div class="col-lg-5"></div>
+				</div>
+				<br /> 
+				<div class="row">
+					<div class="col-lg-5"></div>
+					<div class="col-lg-5">
+						<span class="text-center" th:text="${msgerr}" style="color: red;" />
+					</div>
+					<div class="col-lg-2"></div>
+				</div>
+			 <br />
+			</div>
+		</form>
+	</div>
+
+	<br />
+	<br />
+
+	<div class="container">
+		<div th:if="${docform.image1 != -1}">
+			<div class="form-group">
+				<label class="form-control">IMAGE PRINCIPALE</label>
+			</div>
+			<br />
+			<div class="row">
+				<div class="col-lg-2"></div>
+				<div class="col-lg-8">
+					<img th:src="@{/viewImage/{id}(id=${docform.image1})}"
+						alt="Image_Principale_projet"
+						style="max-width: 100%; height: auto;">
+				</div>
+				<div class="col-lg-2"></div>
+			</div>
+			<br />
+			<div class="row">
+				<div class="col-lg-5"></div>
+				<div class="col-lg-2">
+					<form action="#"
+						th:action="@{/DelUploadPicture/{id}(id=${docform.image1})}"
+						method="POST">
+						<button class="btn btn-primary" type="submit">Supprimer
+							Image Principale</button>
+					</form>
+				</div>
+				<div class="col-lg-5"></div>
+			</div>
+		</div>
+	</div>
+	<br />
+	<br />
+	<div class="container">
+		<div th:if="${docform.image2 != -1}">
+			<div class="form-group">
+				<label class="form-control">SECONDE IMAGE</label>
+			</div>
+			<br />
+			<div class="row">
+				<div class="col-lg-2"></div>
+				<div class="col-lg-8">
+					<img th:src="@{/viewImage/{id}(id=${docform.image2})}"
+						alt="Seconde_Image_projet" style="max-width: 100%; height: auto;">
+				</div>
+				<div class="col-lg-2"></div>
+			</div>
+			<br />
+			<div class="row">
+				<div class="col-lg-5"></div>
+				<div class="col-lg-2">
+					<form action="#"
+						th:action="@{/DelUploadPicture/{id}(id=${docform.image2})}"
+						method="POST">
+						<button class="btn btn-primary" type="submit">Supprimer
+							Seconde image</button>
+					</form>
+				</div>
+				<div class="col-lg-5"></div>
+			</div>
+		</div>
+	</div>
+	<br />
+	<br />
+	<div class="container">
+		<div th:if="${docform.image3 != -1}">
+			<div class="form-group">
+				<label class="form-control">TROISIEME IMAGE</label>
+			</div>
+			<br />
+			<div class="row">
+				<div class="col-lg-2"></div>
+				<div class="col-lg-8">
+					<img th:src="@{/viewImage/{id}(id=${docform.image3})}"
+						alt="Image_projet" style="max-width: 100%; height: auto;">
+				</div>
+				<div class="col-lg-2"></div>
+			</div>
+			<div class="row">
+				<div class="col-lg-5"></div>
+				<div class="col-lg-2">
+					<form action="#"
+						th:action="@{/DelUploadPicture/{id}(id=${docform.image3})}"
+						method="POST">
+						<button class="btn btn-primary" type="submit">Supprimer
+							Troisieme image</button>
+					</form>
+				</div>
+				<div class="col-lg-5"></div>
+			</div>
+		</div>
+	</div>
+	<br />
+	<br />
+
+	<div th:replace="../static/layout_light :: footer"></div>
+
+</body>
+</html>

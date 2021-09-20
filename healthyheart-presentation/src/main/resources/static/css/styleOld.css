@@ -1,0 +1,16 @@
+label{ 
+	margin-right: 15px; 
+}
+
+.formu{
+	display:none;
+}
+
+.user_name{
+    font-size:14px;
+    font-weight: bold;
+}
+.comments-list .media{
+    border-bottom: 1px dotted #ccc;
+}
+

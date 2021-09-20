@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+<th:block th:replace="../static/layout :: headerfiles"></th:block>
+<meta charset="UTF-8">
+<title>Liste Participation en attente</title>
+</head>
+<body>
+	<div th:replace="../static/layout :: header"></div>
+
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<hr />
+	<h1 class="text-center">Liste de mes contributions</h1>
+	<hr />
+	<div class="container">
+		<table class="table">
+			<thead class="thead-light">
+				<tr>
+					<th>Nom du projet</th>
+					<th>Auteur du projet</th>
+					<th>Type de participation</th>
+					<th>Montant collecté</th>
+					<th>Montant attendu</th>
+					<th>Date participation</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="part:${participations}">
+					<td><p th:text="${part.projet.titre}"></p></td>
+					<td><p
+							th:text="${part.projet.portefeuilleprojet.porteurprojet.role.utilisateur.prenom} 
+							+ ' ' 
+							+ ${part.projet.portefeuilleprojet.porteurprojet.role.utilisateur.nom}"></p></td>
+					<td><p th:text="${part.typeParticipation}"></p></td>
+					<td><p th:text="${part.projet.montantCollecte} + ' euros'"></p></td>
+					<td><p th:text="${part.projet.montantAttendu} + ' euros'"></p></td>
+					<td><p th:text="${#calendars.format(part.date,'dd MMM yyyy')}"></p></td>
+					<td><a
+						th:href="@{/showProjet/{id}/DON(id=${part.projet.idProjet})}"><button
+								class="btn btn-info">Voir le projet</button></a>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+
+	<div th:replace="../static/layout :: footer"></div>
+</body>
+</html>

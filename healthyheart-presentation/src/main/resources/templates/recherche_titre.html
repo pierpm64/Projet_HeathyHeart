@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+	<fieldset>
+		<legend>Recherche </legend>
+		<form action="#" th:action="@{/rechercherProjetParTitre}"
+			th:object="${rechercheParTitreForm}" method="POST">
+			<div>
+				<label>Titre du projet :</label> <input type="text" placeholder="Titre" th:field="*{titre}">
+			</div>
+			<button type="submit" >Rechercher</button>
+		</form>
+	</fieldset>
+
+</body>
+</html>

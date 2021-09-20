@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Mes favoris</title>
+<script src="https://kit.fontawesome.com/9768d7d480.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<fieldset>
+		<legend>Mes favoris</legend>
+		<table>
+			<tr>
+				<th>Titre</th>
+				<th>Courte description</th>
+				<th>Longue description</th>
+				<th>Montant attendu</th>
+				<th>Montant collecté</th>
+				<th>Date de fin</th>
+				<th>Gérer les favoris</th>
+			</tr>
+			<tr th:each="proj:${maListeProjetsFavoris}">
+				<td><p th:text="${proj.titre}"></p></td>
+				<td><p th:text="${proj.descriptionCourte}"></p></td>
+				<td><p th:text="${proj.descriptionLongue}"></p></td>
+				<td><p th:text="${proj.montantAttendu}"></p></td>
+				<td><p th:text="${proj.montantCollecte}"></p></td>
+				<td><p th:text="${proj.dateFin}"></p></td>
+				<td> 
+					<a th:href="@{/gererFavori/{idProjet}(idProjet=${proj.idProjet})}"> retirer des favoris</i></a>							
+				</td>
+			</tr>
+		</table>
+	</fieldset>
+</body>
+</html>

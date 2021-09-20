@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+<th:block th:replace="../static/layout :: headerfiles"></th:block>
+<meta charset="UTF-8">
+<title>don valide</title>
+</head>
+<body>
+	<div th:replace="../static/layout :: header"></div>
+
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<hr />
+
+	<div class=container>
+		<div class="row">
+			<h3 class="text-center">Vous n'avez aucun projet en favori.</h3>
+		</div>
+		<hr>
+		<div class="text-center">
+			<a th:href="@{/ShowProjetListPublie}">Accéder au catalogue</a>
+		</div>
+		<hr>
+		<div class="text-center">
+			<a th:href="@{/}">Retour à l'accueil</a>
+		</div>
+	</div>
+	<hr>
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+
+	<div th:replace="../static/layout :: footer"></div>
+</body>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Faire un don</title>
+</head>
+<body>
+	
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<hr />
+	<h1 class="text-center">Liste Dons Monétaires</h1>
+	<hr />
+	
+	<fieldset>
+		<div>
+			<label>Total :</label>
+			<label th:text="${count}"></label>
+		</div>
+		<br>
+		<a th:href="@{/don/faireUnDon/projet}">Ajouter don</a>
+		<table border="1" >
+			<tr>
+				<th>id</th>
+				<th>montant</th>
+				<th>date</th>
+				<th>Actions</th>
+			</tr>
+			<tr th:each="don:${donMonetaireList}">
+				<td><p th:text="${don.idDon}"></p></td>
+				<td><p th:text="${don.montant}"></p></td>
+				<td><p th:text="${#dates.format(don.date, 'dd MMM yyyy')}"></p></td>
+				<td>
+					<a th:href="@{/modifierDon/{id}(id=${don.idDon})}">Modifier</a> //
+					<a th:href="@{/supprimerDon/{id}(id=${don.idDon})}">Supprimer</a>
+				</td>
+			</tr>
+		
+		</table>
+
+	</fieldset>
+	
+	<br />
+	<br />
+	<br />	
+	<br />
+	<br />
+</body>
+</html>

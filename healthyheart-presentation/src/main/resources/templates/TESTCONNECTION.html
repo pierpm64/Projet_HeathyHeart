@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+<th:block th:replace="../static/layout_TEST :: headerfiles"></th:block>
+<meta charset="UTF-8">
+<title>Se connecter</title>
+</head>
+<body id="page-top" class="index">
+	<div th:replace="../static/layout_TEST :: header"></div>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+			<form th:action="@{/connecterUtilisateur}" method="POST">
+				<label>email</label> <input type="text"
+					th:field="*{loginForm.email}" /> <label>mdp</label> <input
+					type="text" th:field="*{loginForm.password}" /> <input
+					type="submit" value="Enregistrer" />
+			</form>
+
+		<div th:replace="../static/layout_TEST :: footer"></div>
+	
+</body>
+</html>

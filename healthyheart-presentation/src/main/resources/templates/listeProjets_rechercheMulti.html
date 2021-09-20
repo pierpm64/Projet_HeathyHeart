@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+<meta charset="UTF-8">
+<script src="https://kit.fontawesome.com/9768d7d480.js"
+	crossorigin="anonymous"></script>
+<th:block th:replace="../static/layout :: headerfiles"></th:block>
+<title>Résultat de votre recherche</title>
+</head>
+<body>
+	<div th:replace="../static/layout :: header"></div>
+
+
+<br/><br/><br/><br/><br/>
+
+			<hr />
+			<h1 class="text-center">Résultat de votre recherche</h1>
+			<hr />
+
+			<section>
+				<div class="section-inner">
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-4 blog-item mb100 wow match-height"
+								th:each="projetPublie : ${listProjetPublie}">
+								<a
+									th:href="@{/showProjet/{id}/DON(id=${projetPublie.projet.idProjet})}">
+									<div class="card text-white bg-info mb-3" rows="10"
+										style="margin-bottom: 20px; height:480px; width:auto;">
+										<div class="row">
+											<div class="col-xs-12">
+												<div class="hover-item mb30">
+													<div th:if="${projetPublie.idImage != -1}">
+														<center>
+															<img
+																th:src="@{/viewImage/{id}(id=${projetPublie.idImage})}"
+																style="max-width: 100%; height: auto;">
+														</center>
+													</div>
+													<div class="overlay-item-caption smoothie"></div>
+													<div class="hover-item-caption smoothie">
+														<h3 class="vertical-center smoothie"></h3>
+													</div>
+												</div>
+												<h2 class="post-title"
+													th:text="${projetPublie.projet.titre}"></h2>
+												<div class="item-metas text-muted mb10">
+													<span class="meta-item"><i
+														class="pe-icon pe-7s-folder"></i> POSTED BY <span
+														th:text="${projetPublie.projet.portefeuilleprojet.porteurprojet.libelle}"></span></span>
+													<span class="meta-item"><i
+														class="pe-icon pe-7s-ticket"></i> TAGS <span
+														th:text="${projetPublie.projet.categorie.typeProjet.libelle}"></span></span>
+												</div>
+												<div class="item-metas text-muted mb10">
+													<span class="meta-item"><i
+														class="pe-icon pe-7s-user"></i> AUTHOR <span
+														th:text="${projetPublie.projet.portefeuilleprojet.porteurprojet.role.utilisateur.nom}"></span>
+														<span
+														th:text="${projetPublie.projet.portefeuilleprojet.porteurprojet.role.utilisateur.prenom}"></span></span>
+												</div>
+												<div class="item-metas text-muted mb10">
+													<span class="meta-item"><i
+														class="pe-icon pe-7s-comment"></i> CLOSING DATE <span
+														th:text="${#calendars.format(projetPublie.projet.dateFin,'dd MM yyyy')}"></span></span>
+													<div class="item-metas text-muted mb10">
+														<span class="meta-item"><i
+															class="pe-icon pe-7s-comment"></i> MATERIAL DONATION <span
+															th:text="${projetPublie.projet.isDonMateriel}"></span></span> <span
+															class="meta-item"><i class="pe-icon pe-7s-comment"></i>
+															TIME DONATION <span
+															th:text="${projetPublie.projet.isDonTemps}"></span></span>
+													</div>
+												</div>
+												<div class="item-metas text-muted mb30">
+													<span class="meta-item"><i
+														class="pe-icon pe-7s-comment"></i> COLLECTED <span
+														th:text="${projetPublie.projet.montantCollecte}"></span></span> <span
+														class="meta-item"><i class="pe-icon pe-7s-comment"></i>
+														EXPECTED <span
+														th:text="${projetPublie.projet.montantAttendu}"></span></span>
+												</div>
+												
+													<span th:if="${projetPublie.projet.isFavori}"><a
+														th:href="@{/gererFavori/{idProjet}(idProjet=${projetPublie.projet.idProjet})}"><i
+															class="fas fa-heart"></i></a></span> <span
+														th:if="${!projetPublie.projet.isFavori}"><a
+														th:href="@{/gererFavori/{idProjet}(idProjet=${projetPublie.projet.idProjet})}"><i
+															class="far fa-heart"></i></a></span>
+												
+												<!-- <p>Behind sooner dining so window excuse he summer.
+											Breakfast met certainty and fulfilled propriety led. Waited
+											get either are wooded little her. Contrasted unreserved as mr
+											particular collecting it everything as indulgence. Seems ask
+											meant merry could put. Age old begin had boy noisy table
+											front whole given.</p> -->
+											</div>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		
+	<br/><br/><br/><br/><br/>
+	<div th:replace="../static/layout :: footer"></div>
+</body>
+</html>

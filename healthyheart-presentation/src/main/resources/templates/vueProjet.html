@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+<th:block th:replace="../static/layout :: headerfiles"></th:block>
+<meta charset="UTF-8">
+<title>Afficher Projet selectionné</title>
+
+</head>
+<body>
+	<div th:replace="../static/layout :: header"></div>
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<hr />
+	<h1 class="text-center">Détail du Projet</h1>
+	<hr />
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-2 text-center">
+				<a class="btn btn-primary"
+					th:href="@{'/afficherListeCommentaires/projet?id=' + ${infoproj.projet.idProjet}}">Commentaires</a>
+
+			</div>
+			<div class="col-lg-2">
+				<a class="btn btn-primary"
+					th:href="@{/don/afficherListeContributeurs/{id}(id=${infoproj.projet.idProjet})}">Liste
+					contributeurs</a>
+			</div>
+			<div th:if="${infoproj.action == 'ADMF'}">
+				<div class="col-lg-1">
+					<a class="btn btn-primary"
+					th:href="@{/showProjetHisto/{id}/ADMF(id=${infoproj.projet.idProjet})}">Historique</a>
+				</div>
+			</div>
+			<div th:if="${infoproj.action == 'ADMU'}">
+				<div class="col-lg-1">
+					<a class="btn btn-primary"
+					th:href="@{/showProjetHisto/{id}/ADMU(id=${infoproj.projet.idProjet})}">Historique</a>
+				</div>
+			</div>
+			<div th:if="${infoproj.action == 'DON'}">
+				<div class="col-lg-1"></div>
+			</div>
+			<div class="col-lg-2"></div>
+			<div class="col-lg-5 text-right">
+				mise à jour le <b
+					th:text="${#calendars.format(infoproj.projet.dateMaj,'EEEE dd MMMMM yyyy à HH:mm:ss')}"></b>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-7"></div>
+			<div class="col-lg-5 text-right">
+				par <b
+					th:text="${infoproj.projet.portefeuilleprojet.porteurprojet.role.utilisateur.prenom}">
+				</b> <b
+					th:text="${infoproj.projet.portefeuilleprojet.porteurprojet.role.utilisateur.nom}">
+				</b> (email : <b
+					th:text="${infoproj.projet.portefeuilleprojet.porteurprojet.role.utilisateur.email}">
+				</b>)
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-7"></div>
+			<div class="col-lg-5 text-right">
+				Statut : <b th:text="${infoproj.projet.statutDuProjet}">
+			</div>
+		</div>
+	</div>
+
+
+
+	<div class="container">
+		<div class=" row">
+			<div class="col-lg-12">
+				<h2 class="text-center" th:text="${infoproj.projet.titre}"></h2>
+			</div>
+		</div>
+		<br /> <br />
+		<div class="row">
+			<div class="col-lg-2"></div>
+			<div class="col-lg-3 text-center">
+				<label>Type Porteur de projet : </label> <b
+					th:text="${infoproj.projet.portefeuilleprojet.porteurprojet.typePorteur}">
+			</div>
+			<div class="col-lg-2"></div>
+			<div class="col-lg-3 text-center">
+				<label>Libellé : </label> <b
+					th:text="${infoproj.projet.portefeuilleprojet.porteurprojet.libelle}">
+				</b>
+			</div>
+		</div>
+
+		<div class="row">
+			<div th:if="${infoproj.image1 != -1}">
+				<div class="row">
+					<div class="col-lg-2"></div>
+					<div class="col-lg-8">
+						<hr />
+						<img th:src="@{/viewImage/{id}(id=${infoproj.image1})}"
+							alt="Image_Principale_projet"
+							style="max-width: 100%; height: auto;">
+						<hr />
+					</div>
+					<div class="col-lg-2"></div>
+				</div>
+			</div>
+		</div>
+		<br />
+		<div class="row">
+			<div class="col-lg-2"></div>
+			<div class="col-lg-3 text-center">
+				<label>Type de projet : </label> <b
+					th:text="${infoproj.projet.categorie.typeProjet.libelle}"></b>
+			</div>
+			<div class="col-lg-2"></div>
+			<div class="col-lg-3 text-center">
+				<label>Territoire : </label> <b
+					th:text="${infoproj.projet.categorie.territoire.libelle}"></b>
+			</div>
+			<div class="col-lg-2"></div>
+		</div>
+		<br /> <br />
+		<div class="row">
+			<div class="col-lg-2"></div>
+			<div class="col-lg-6 text-center">
+				<textarea class="form-control" rows="5" disabled="disabled"
+					th:field="${infoproj.projet.descriptionCourte}"
+					style="width: 135%;"></textarea>
+			</div>
+			<div class="col-lg-2"></div>
+		</div>
+		<br /> <br />
+		<div class="row">
+			<div class="col-lg-2"></div>
+			<div class="col-lg-3 text-center">
+				<label>Montant collecté :</label> <b
+					th:text="${infoproj.projet.montantCollecte}"></b>€
+			</div>
+			<div class="col-lg-2"></div>
+			<div class="col-lg-3 text-center">
+				<label>Montant attendu :</label> <b
+					th:text="${infoproj.projet.montantAttendu}"></b>€
+			</div>
+			<div class="col-lg-2"></div>
+		</div>
+
+		<br /> <br />
+		<div class="row">
+			<div class="col-lg-2"></div>
+			<div class="col-lg-3 text-center">
+				<label>Projet avec possiblité de don de temps :</label> <b
+					th:text="${infoproj.projet.donTemps}? 'Oui' : 'Non'"></b>
+			</div>
+			<div class="col-lg-2"></div>
+			<div class="col-lg-3 text-center">
+				<label>Projet avec possiblité de don de materiel : </label> <b
+					th:text="${infoproj.projet.donMateriel}? 'Oui' : 'Non'"></b>
+			</div>
+			<div class="col-lg-2"></div>
+		</div>
+		<br /> <br />
+		<div class="row">
+			<div class="col-lg-2"></div>
+			<div class="col-lg-8 text-center">
+				<label>Date fin de collecte : </label> <b
+					th:text="${#calendars.format(infoproj.projet.dateFin,'EEEE dd MMMMM yyyy')}"></b>
+			</div>
+			<div class="col-lg-2"></div>
+		</div>
+		<div class="row">
+			<div th:if="${infoproj.image2 != -1}">
+				<div class="row">
+					<div class="col-lg-2"></div>
+					<div class="col-lg-8">
+						<hr />
+						<img th:src="@{/viewImage/{id}(id=${infoproj.image2})}"
+							alt="Image_Seconde_projet" style="max-width: 100%; height: auto;">
+						<hr />
+					</div>
+					<div class="col-lg-2"></div>
+				</div>
+			</div>
+		</div>
+		<br /> <br />
+		<div class="row">
+			<div class="col-lg-2"></div>
+			<div class="col-lg-6 text-center">
+				<textarea class="form-control" rows="15" disabled="disabled"
+					th:field="${infoproj.projet.descriptionLongue}"
+					style="width: 135%;"></textarea>
+			</div>
+			<div class="col-lg-2"></div>
+		</div>
+		<br /> <br />
+		<div class="row">
+			<div th:if="${infoproj.image3 != -1}">
+				<div class="row">
+					<div class="col-lg-2"></div>
+					<div class="col-lg-8">
+						<hr />
+						<img th:src="@{/viewImage/{id}(id=${infoproj.image3})}"
+							alt="Image_Seconde_projet" style="max-width: 100%; height: auto;">
+						<hr />
+					</div>
+					<div class="col-lg-2"></div>
+				</div>
+			</div>
+		</div>
+		<br /> <br /> <br />
+		<div class="row">
+			<div class="col-lg-2"></div>
+			<div th:if="${infoproj.choixUser == 'USRMAN'}">
+				<span class="col-lg-2 text-center"> <a
+					class="btn btn-primary"
+					th:href="@{/showUpdateForm/{id}(id=${infoproj.projet.idProjet})}">Modifier</a>
+				</span> <span class="col-lg-3 text-center">
+
+					<button class="btn btn-primary" onclick="CnfStatProj('SUPPRIMER')">Supprimer</button>
+				</span> <span class="col-lg-3 text-center">
+					<button class="btn btn-primary" onclick="CnfStatProj('ASKAPPR')">Demande
+						Approbation</button>
+				</span>
+			</div>
+			<div th:if="${infoproj.choixUser == 'USRCAN'}">
+				<span class="col-lg-4 text-center">
+
+					<button class="btn btn-primary" onclick="CnfStatProj('CANASKAPPR')">Annuler
+						Approbation</button>
+				</span> <span class="col-lg-4 text-center">
+
+					<button class="btn btn-primary" onclick="CnfStatProj('SUPPRIMER')">Supprimer</button>
+				</span>
+			</div>
+			<div th:if="${infoproj.choixUser == 'USRDEL'}">
+				<div class="col-lg-3"></div>
+				<span class="col-lg-2 text-center">
+					<button class="btn btn-primary" onclick="CnfStatProj('SUPPRIMER')">Supprimer</button>
+				</span>
+				<div class="col-lg-3"></div>
+
+			</div>
+			<div th:if="${infoproj.choixUser == 'USRMOD'}">
+				<span class="col-lg-4 text-center"> <a
+					class="btn btn-primary"
+					th:href="@{/showUpdateForm/{id}(id=${infoproj.projet.idProjet})}">Modifier</a>
+
+				</span> <span class="col-lg-4 text-center">
+					<button class="btn btn-primary" onclick="CnfStatProj('SUPPRIMER')">Supprimer</button>
+				</span>
+
+			</div>
+			<div th:if="${infoproj.choixUser == 'ADMMAN'}">
+				<span class="col-lg-2 text-center"> <a
+					class="btn btn-primary"
+					th:href="@{/showUpdateForm/{id}(id=${infoproj.projet.idProjet})}">Modifier</a>
+				</span> <span class="col-lg-3 text-center">
+
+					<button class="btn btn-primary" onclick="CnfStatProj('REJETER')">Rejeter</button>
+				</span> <span class="col-lg-3 text-center">
+					<button class="btn btn-primary" onclick="CnfStatProj('PUBLIER')">Publier</button>
+				</span>
+			</div>
+			<div th:if="${infoproj.choixUser == 'ADMRES'}">
+				<span class="col-lg-4 text-center"> <a
+					class="btn btn-primary"
+					th:href="@{/showUpdateForm/{id}(id=${infoproj.projet.idProjet})}">Modifier</a>
+				</span> <span class="col-lg-4 text-center">
+
+					<button class="btn btn-primary" onclick="CnfStatProj('RESTAURER')">Restaurer</button>
+				</span>
+
+			</div>
+			<div th:if="${infoproj.choixUser == 'ADMDEL'}">
+				<span class="col-lg-4 text-center"> <a
+					class="btn btn-primary"
+					th:href="@{/showUpdateForm/{id}(id=${infoproj.projet.idProjet})}">Modifier</a>
+
+				</span> <span class="col-lg-4 text-center">
+					<button class="btn btn-primary" onclick="CnfStatProj('SUPPRIMER')">Supprimer</button>
+				</span>
+			</div>
+			<div th:if="${infoproj.choixUser == 'DONDON'}">
+				<span class="col-lg-8 text-center"> <a
+					class="btn btn-primary"
+					th:href="@{'/don/faireUnDon/projet?id=' + ${infoproj.projet.idProjet}}">Donner</a>
+				</span>
+			</div>
+			<div class="col-lg-2"></div>
+		</div>
+	</div>
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<div th:replace="../static/layout :: footer"></div>
+	<script th:inline="javascript">
+/*<![CDATA[*/
+function CnfStatProj(Status) {
+	switch (Status) {
+	case 'SUPPRIMER' :  var r = confirm("Confirmez la suppression\n\nAppuyer sur Ok pour confirmer la suppression du projet");break;
+	case 'PUBLIER' :  var r = confirm("Confirmez la Publication\n\nAppuyer sur Ok pour confirmer la publication du projet");break;
+	case 'REJETER' : var r = confirm("Confirmez le Rejet\n\nAppuyer sur Ok pour confirmer le rejet du projet");break;
+	case 'RESTAURER' : var r = confirm("Confirmez la Restauration\n\nAppuyer sur Ok pour confirmer la restauration du projet");break;
+	case 'APPROVE' : var r = confirm("Confirmez l'approbation\n\nAppuyer sur Ok pour approuver la validation du projet");break;
+	case 'ASKAPPR' : var r = confirm("Confirmez la demande d'Approbation\n\nAppuyer sur Ok pour confirmer la demande d'approbation du projet");break;
+	case 'CANASKAPPR' : var r = confirm("Confirmez l'Annulation demande d'Approbation\n\nAppuyer sur Ok pour confirmer l'annulation demande d'approbation du projet");break;
+	default : var r = false;
+	}
+  if (r == true) {
+	  var projid = /*[[${infoproj.projet.idProjet}]]*/ 'projid';
+	  var action = /*[[${infoproj.action}]]*/ 'action';
+      location.href = "/ModifierStatProjet/" + projid + "/" + Status + "/" + action;
+  }
+	
+
+}
+/*]]>*/
+
+
+</script>
+</body>
+</html>

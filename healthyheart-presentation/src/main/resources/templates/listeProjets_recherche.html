@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Projet(s) recherché(s)</title>
+</head>
+<body>
+	<fieldset>
+		<legend>résultat de votre recherche </legend>
+		<table>
+			<tr>
+				<th>Titre</th>
+				<th>Courte description</th>
+				<th>Longue description</th>
+				<th>Montant attendu</th>
+				<th>Montant collecté</th>
+				<th>Date de fin</th>
+			</tr>
+			<tr th:each="proj:${listeProjetTrouveParTitre}">
+				<td><p th:text="${proj.titre}"></p></td>
+				<td><p th:text="${proj.descriptionCourte}"></p></td>
+				<td><p th:text="${proj.descriptionLongue}"></p></td>
+				<td><p th:text="${proj.montantAttendu}"></p></td>
+				<td><p th:text="${proj.montantCollecte}"></p></td>
+				<td><p th:text="${proj.dateFin}"></p></td>
+			</tr>
+		</table>
+	</fieldset>
+	<div>
+		<a th:href="@{/showSearchBox}">Effectuer une nouvelle recherche</a>
+	</div>
+</body>
+</html>

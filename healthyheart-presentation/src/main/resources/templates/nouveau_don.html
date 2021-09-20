@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Ajouter don monetaire</title>
+</head>
+<body>
+		<h2>Ajouter don </h2>
+	<hr>
+	<form action="#" th:action="@{/sauvegarderDon}" 
+			th:object="${donAAjouterOuModifier}" method="POST">
+		<label>Montant: </label>
+		<input type="text" th:field="*{montant}"/>
+		<br>
+		<input type="submit" value="Ajouter"/>
+		<br>
+		<input type="reset" value="Reset fields">
+	</form>
+	<a th:href="@{/afficherListeDesDon}">Back to List</a>
+
+</body>
+</html>

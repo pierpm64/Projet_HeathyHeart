@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+<th:block th:replace="../static/layout :: headerfiles"></th:block>
+<meta charset="UTF-8">
+<title>Liste Participation en attente</title>
+</head>
+<body>
+	<div th:replace="../static/layout :: header"></div>
+
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<hr />
+	<h1 class="text-center">Liste des dons monétaires en attente</h1>
+	<hr />
+	<div class="container">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>id_participation</th>
+					<th>Nom contributeur</th>
+					<th>Montant</th>
+					<th>Date participation</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="don:${monetairesList}">
+					<td><p th:text="${don.participationProjet.idParticipation}"></p></td>
+					<td><p
+							th:text="${don.participationProjet.role.utilisateur.prenom} 
+							+ ' ' 
+							+ ${don.participationProjet.role.utilisateur.nom}"></p></td>
+					<td><p th:text="${don.montant}"></p></td>
+					<td><p
+							th:text="${#calendars.format(don.participationProjet.date,'dd MMM yyyy')}"></p></td>
+					<td><a th:href="@{'/validateDonMonetaire?id=' + ${don.idDon}}"><button
+								class="btn btn-primary">Valider</button></a> <a
+						th:href="@{'/rejectDonMonetaire?id=' + ${don.idDon}}"><button
+								class="btn btn-danger">Rejeter</button></a></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		<div class="row">
+			<h3 class="text-center">Liste des dons matériels en attente</h3>
+		</div>
+		<br>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>id_participation</th>
+					<th>Nom contributeur</th>
+					<th>Nom du matériel</th>
+					<th>Prix unitaire</th>
+					<th>Quantité</th>
+					<th>Date participation</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="don:${materielList}">
+					<td><p th:text="${don.participationProjet.idParticipation}"></p></td>
+					<td><p
+							th:text="${don.participationProjet.role.utilisateur.prenom} 
+							+ ' ' 
+							+ ${don.participationProjet.role.utilisateur.nom}"></p></td>
+					<td><p th:text="${don.libelle}"></p></td>
+					<td><p th:text="${don.montant}"></p></td>
+					<td><p th:text="${don.quantite}"></p></td>
+					<td><p
+							th:text="${#calendars.format(don.participationProjet.date,'dd MMM yyyy')}"></p></td>
+					<td><a th:href="@{'/validateDonMateriel?id=' + ${don.idDon}}"><button
+								class="btn btn-primary">Valider</button></a> <a
+						th:href="@{'/rejectDonMateriel?id=' + ${don.idDon}}"><button
+								class="btn btn-danger">Rejeter</button></a></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		<div class="row">
+			<h3 class="text-center">Liste des dons de temps en attente</h3>
+		</div>
+		<br>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>id_participation</th>
+					<th>Nom contributeur</th>
+					<th>Nombre d'heures</th>
+					<th>Date participation</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="don:${tempsList}">
+					<td><p th:text="${don.participationProjet.idParticipation}"></p></td>
+					<td><p
+							th:text="${don.participationProjet.role.utilisateur.prenom} 
+							+ ' ' 
+							+ ${don.participationProjet.role.utilisateur.nom}"></p></td>
+					<td><p th:text="${don.nbHeures}"></p></td>
+					<td><p
+							th:text="${#calendars.format(don.participationProjet.date,'dd MMM yyyy')}"></p></td>
+					<td><a th:href="@{'/validateDonTemps?id=' + ${don.idDon}}"><button
+								class="btn btn-primary">Valider</button></a> <a
+						th:href="@{'/rejectDonTemps?id=' + ${don.idDon}}"><button
+								class="btn btn-danger">Rejeter</button></a></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+
+	</div>
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	
+	<div th:replace="../static/layout :: footer"></div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Utilisateur connecté</title>
+</head>
+<body>
+	<fieldset>
+		<legend>Vous êtes bien connecté</legend>
+		<label th:text="${emailUtilisateurConnecte}"></label>
+		<br/>
+		<span th:text="${message}"></span>
+		<label th:text="${prenomUtilisateur}"></label>	
+	</fieldset>
+</body>
+</html>

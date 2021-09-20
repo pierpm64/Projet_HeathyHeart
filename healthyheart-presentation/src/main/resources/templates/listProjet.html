@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+<meta charset="UTF-8">
+<th:block th:replace="../static/layout_light :: headerfiles"></th:block>
+<title>Liste des Projets</title>
+<style>
+.row-email{
+  width: 10%;
+}
+.row-status{
+  width: 10%;
+}
+.row-titre {
+  width: 30%;
+}
+.row-type {
+  width: 10%;
+}
+.row-territoire {
+  width: 10%;
+}
+.row-montant {
+  width: 5%;
+}
+.row-link {
+  width: 10%;
+}
+</style>
+</head>
+<body>
+	<div th:replace="../static/layout_light :: header"></div>
+
+	<hr />
+	<h1 class="text-center">Liste de tous les projets</h1>
+	<hr />
+
+
+	<div class="container">
+		<!-- <a th:href="@{/ShowNewProjetForm}">Add Projet</a> -->
+
+		<div class="row">
+			<div class="col-lg-1">
+				<form action="#" th:action="@{/selectionProjet}" method="POST">
+					<div class="dropdown">
+						<select class="btn btn-primary" th:id="ComboBoxSelectId"
+							th:field="*{listCritere.critere}">
+							<option value="all">Tous</option>
+							<option value="actif">Actif</option>
+							<option value="create">Créé</option>
+							<option value="wait">En Attente</option>
+							<option value="approved">Approuvé</option>
+							<option value="reject">Rejeté</option>
+							<option value="published">Publié</option>
+							<option value="completed">Terminé</option>
+							<option value="deleted">Supprimé</option>
+						</select>
+					</div>
+				</form>
+			</div>
+			<div class="col-lg-11"></div>
+		</div>
+
+		<br />
+
+		<table class="table">
+			<thead class="thead-light">
+				<tr>
+					<th class="row-email">Porteur Projet</th>
+					<th class="row-status">StatutProjet</th>
+					<th class="row-type">Type projet</th>
+					<th class="row-territoire">Territoire</th>
+					<th class="row-titre">Titre</th>
+					<th class="row-montant">Montant Collecté</th>
+					<th class="row-montant">Montant Attendu</th>
+					<th>Date fin</th>
+					<th class="row-link">Action</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="projet: ${listCritere.projets}">
+					<td
+						th:text="${projet.portefeuilleprojet.porteurprojet.role.utilisateur.email}"></td>
+					<td th:text="${projet.statutDuProjet}"></td>
+					<td th:text="${projet.categorie.typeProjet.libelle}"></td>
+					<td th:text="${projet.categorie.territoire.libelle}"></td>
+					<td th:text="${projet.titre}"></td>
+					<td th:text="${projet.montantCollecte}"></td>
+					<td th:text="${projet.montantAttendu}"></td>
+					<td th:text="${#calendars.format(projet.dateFin,'dd/MM/yyyy')}"></td>
+					<!-- 	<td th:text="${projet.donMateriel}?'Oui':'Non'"></td>
+					<td th:text="${projet.donTemps}?'Oui':'Non'"></td> -->
+					<td><a class="btn btn-info" th:href="@{/showProjet/{id}/ADMF(id=${projet.idProjet})}">Detail</a></td>
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+	<br/><br/><br/><br/><br/><br/><br/><br/><br/>
+	<div th:replace="../static/layout_light :: footer"></div>
+
+	<script>
+        $("#ComboBoxSelectId").change(function () {
+            $("form").submit()
+        })
+    </script>
+</body>
+</html>

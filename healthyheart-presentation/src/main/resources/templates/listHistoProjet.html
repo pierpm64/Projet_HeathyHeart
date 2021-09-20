@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+<meta charset="UTF-8">
+<th:block th:replace="../static/layout_light :: headerfiles"></th:block>
+<title>Liste des messages</title>
+<style>
+.row-dateheure {
+	width: 15%;
+}
+
+.row-titre {
+	width: 35%;
+}
+
+.row-email {
+	width: 15%;
+}
+</style>
+</head>
+<body id="page-top" class="index">
+	<div th:replace="../static/layout_light :: header"></div>
+
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<hr />
+	<h1 class="text-center">Historique Projet</h1>
+	<hr />
+
+	<div class="container">
+		<div class="row">
+
+			<div th:if="${action == 'ADMF'}">
+				<div class="col-lg-1">
+					<a class="btn btn-primary"
+						th:href="@{/showProjet/{id}/ADMF(id=${idProj})}">Retour</a>
+				</div>
+			</div>
+
+			<div th:if="${action == 'ADMU'}">
+				<div class="col-lg-1">
+					<a class="btn btn-primary"
+						th:href="@{/showProjet/{id}/ADMU(id=${idProj})}">Retour</a>
+				</div>
+			</div>
+
+		</div>
+		<br>
+		<table class="table">
+			<thead class="thead-light">
+				<tr>
+					<th class="row-titre">Evenement</th>
+					<th class="row-titre">Libelle</th>
+					<th class="row-dateheure">Date/heure</th>
+					<th class="row-email">Utilisateur</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="histo:${histoListe}">
+					<td><p th:text="${histo.evenement}"></p></td>
+					<td><p th:text="${histo.libelle}"></p></td>
+					<td
+						th:text="${#calendars.format(histo.dateHeure,'dd/MM/yyyy à HH:mm::ss')}"></td>
+					<td><p th:text="${histo.acteur.email}"></p></td>
+				</tr>
+			</tbody>
+
+		</table>
+
+	</div>
+	</div>
+	</div>
+	<br />
+	<br />
+	<br />
+	<div th:replace="../static/layout_light :: footer"></div>
+</body>
+</html>

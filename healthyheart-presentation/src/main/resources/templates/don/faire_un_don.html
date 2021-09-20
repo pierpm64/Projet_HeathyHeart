@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+<th:block th:replace="../static/layout :: headerfiles"></th:block>
+<title>Ajouter don</title>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+	<div th:replace="../static/layout :: header"></div>
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<hr />
+	<h1 class="text-center">Faire un don</h1>
+	<hr />
+	<div class="container mt-5 mb-5">
+		<h3>Veuillez sélectionner un type de don :</h3>
+		<br>
+		<div class="row">
+		<div class="col-md-4 text-center">
+		<label> <input class="form-check-input" type="radio"
+				name="donRadio" value="monetaire"> Don monétaire
+			</label>
+		</div>
+		<div class="col-md-4 text-center">
+		<label th:if="${donForm.participationProjet.projet.donMateriel}">
+				<input class="form-check-input" type="radio" name="donRadio"
+				value="materiel"> Don matériel
+			</label> <label th:unless="${donForm.participationProjet.projet.donMateriel}">
+				<input id="radioMaterielOff" class="form-check-input disabled"
+				type="radio" name="donRadio" value="materiel" disabled> Don matériel
+			</label>
+		</div>
+		<div class="col-md-4 text-center">
+		<label th:if="${donForm.participationProjet.projet.donTemps}">
+				<input class="form-check-input" type="radio" name="donRadio"
+				value="temps"> Don de temps
+			</label> <label th:unless="${donForm.participationProjet.projet.donTemps}">
+				<input id="radioTempsOff" class="form-check-input" type="radio"
+				name="donRadio" value="temps" disabled> Don de temps
+			</label>
+		</div>
+			
+		</div>
+		<hr>
+		<!-- don monetaire form -->
+		<div class="monetaire formu">
+			<div class="row">
+				<h3 class="text-center">Don Monétaire</h3>
+			</div>
+			<form action="#" th:action="@{/don/sauvegarderDonMonetaire}"
+				method="POST" th:object="${donForm}">
+				<input type="hidden" th:field="*{utilisateur.email}" /> <input
+					type="hidden" th:field="*{participationProjet.projet.idProjet}" />
+				<div class="row d-flex align-items-center justify-content-center">
+					<div class="col-md-6">
+						<div class="card px-5 py-5">
+							<div class="form-input">
+								<i class="fa fa-euro-sign"></i> <input type="number"
+									class="form-control" th:field="*{donMonetaire.montant}"
+									placeholder="Votre montant">
+							</div>
+							<div class="form-input">
+								<div class="form-check form-switch">
+									<input type="checkbox" th:field="*{anonyme}"
+										class="form-check-input" /> <label>Don anonyme?</label>
+								</div>
+							</div>
+							<input type="reset" value="Remettre à zéro"
+								class="btn btn-secondary" />
+							<button class="btn btn-primary mt-4 signup" type="submit">Envoyer</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<!-- don materiel form -->
+		<div class="materiel formu">
+			<div class="row">
+				<h3 class="text-center">Don Matériel</h3>
+			</div>
+			<form action="#" th:action="@{/don/sauvegarderDonMateriel}"
+				method="POST" th:object="${donForm}">
+				<input type="hidden" th:field="*{utilisateur.email}" /> <input
+					type="hidden" th:field="*{participationProjet.projet.idProjet}" />
+				<div class="row d-flex align-items-center justify-content-center">
+					<div class="col-md-6">
+						<div class="card px-5 py-5">
+							<div class="form-input">
+								<i class="fas fa-euro-sign"></i> <input type="text"
+									class="form-control" th:field="*{donMateriel.libelle}"
+									placeholder="Quel matériel voulez-vous donner ?">
+							</div>
+							<div class="form-input">
+								<i class="fas fa-euro-sign"></i> <input type="number"
+									class="form-control" th:field="*{donMateriel.montant}"
+									placeholder="Prix unitaire">
+							</div>
+							<div class="form-input">
+								<i class="fas fa-euro-sign"></i> <input type="number"
+									class="form-control" th:field="*{donMateriel.quantite}"
+									placeholder="Quantité">
+							</div>
+							<div class="form-input">
+								<div class="form-check form-switch">
+									<input type="checkbox" th:field="*{anonyme}"
+										class="form-check-input" /> <label>Don anonyme?</label>
+								</div>
+							</div>
+							<input type="reset" value="Remettre à zéro"
+								class="btn btn-secondary" />
+							<button class="btn btn-primary mt-4 signup" type="submit">Envoyer</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<!-- don temps form -->
+		<div class="temps formu">
+			<div class="row">
+				<h3 class="text-center">Don de temps</h3>
+			</div>
+			<form action="#" th:action="@{/don/sauvegarderDonTemps}"
+				method="POST" th:object="${donForm}">
+				<input type="hidden" th:field="*{utilisateur.email}" /> <input
+					type="hidden" th:field="*{participationProjet.projet.idProjet}" />
+				<div class="row d-flex align-items-center justify-content-center">
+					<div class="col-md-6">
+						<div class="card px-5 py-5">
+							<div class="form-input">
+								<i class="fas fa-euro-sign"></i> <input type="number"
+									class="form-control" th:field="*{donTemps.nbHeures}"
+									placeholder="Nombre d'heures">
+							</div>
+							<div class="form-input">
+								<div class="form-check form-switch">
+									<input type="checkbox" th:field="*{anonyme}"
+										class="form-check-input" /> <label>Don anonyme?</label>
+								</div>
+							</div>
+							<input type="reset" value="Remettre à zéro"
+								class="btn btn-secondary" />
+							<button class="btn btn-primary mt-4 signup" type="submit">Envoyer</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br>
+	<div th:replace="../static/layout :: footer"></div>
+	
+	<script>$(document).ready(function(){
+	    $('input[type="radio"]').click(function(){
+	        var inputValue = $(this).attr("value");
+	        var targetForm = $("." + inputValue);
+	        $(".formu").not(targetForm).hide();
+	        $(targetForm).show();
+	    });
+	});</script>
+</body>
+</html>
